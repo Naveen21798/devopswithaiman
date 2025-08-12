@@ -24,10 +24,10 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > Aug.pem
-          chmod 600 Aug.pem
-          scp -i Aug.pem -o StrictHostKeyChecking=no -r . ec2-user@${{ secrets.EC2_IP }}:/home/ec2-user/app
-          ssh -i Aug.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << 'EOF'
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > github.pem
+          chmod 600 github.pem
+          scp -i github.pem -o StrictHostKeyChecking=no -r . ec2-user@${{ secrets.EC2_IP }}:/home/ec2-user/app
+          ssh -i github.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << 'EOF'
             cd /home/ec2-user/app
             nohup python3 app.py &
           EOF
